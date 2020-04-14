@@ -89,7 +89,8 @@ if __name__ == '__main__':
     hash_tag_list = ["donal trump", "hillary clinton", "barack obama", "bernie sanders"]
     fetched_tweets_filename = "tweets.txt"
 
-    twitter_client = TwitterClient('pycon')
+    #Enter twitter user's handle here and the amount of tweets wanted
+    twitter_client = TwitterClient('realdonaldtrump')
     print(twitter_client.get_user_timeline_tweets(1))
 
 
