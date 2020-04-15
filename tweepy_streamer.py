@@ -5,13 +5,20 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 
 import twitter_credentials
+import numpy as numpy
+import pandas as pd
 
 class TwitterClient():
+
     def __init__(self, twitter_user=None):
         self.auth = TwitterAuthenticator().authenticate_twitter_app()
         self.twitter_client = API(self.auth)
 
         self.twitter_user = twitter_user
+
+
+    def get_twitter_client_api(self)
+    	return self.twitter_client
 
     def get_user_timeline_tweets(self, num_tweets):
         tweets = []
@@ -83,14 +90,14 @@ class TwitterListener(StreamListener):
         print(status)
 
  
-if __name__ == '__main__':
+if __name__ == '__main__': 
  
     # Authenticate using config.py and connect to Twitter Streaming API.
     hash_tag_list = ["donal trump", "hillary clinton", "barack obama", "bernie sanders"]
     fetched_tweets_filename = "tweets.txt"
 
-    #Enter twitter user's handle here and the amount of tweets wanted
-    twitter_client = TwitterClient('realdonaldtrump')
+    #Enter twitter user's handle here and the amount of tweets wanteds
+    twitter_client = TwitterClient()
     print(twitter_client.get_user_timeline_tweets(1))
 
 
