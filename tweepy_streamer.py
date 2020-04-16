@@ -5,7 +5,7 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 
 import twitter_credentials
-import numpy as numpy
+import numpy as np
 import pandas as pd
 
 class TwitterClient():
@@ -94,6 +94,14 @@ class TweetAnalyser ():
 	"""
 	def tweets_to_data_frame(self, tweets):
 		df = pd.DataFrame(data=[tweet.text for tweet in tweets], columns=['Tweets'])
+
+		df['id'] = np.array([tweet.id for tweet in tweets])
+		df['length'] = np.array([len(tweet.text) for tweet in tweets])
+		df['date'] = np.array([tweet.created_at for tweet in tweets])
+		df['source'] = np.array([tweet.source for tweet in tweets])
+		df['likes'] = np.array([tweet.favorite_count for tweet in tweets])
+		df['retweets'] = np.array([tweet.retweet_count for tweet in tweets])
+
 		return df
  
 if __name__ == '__main__': 
@@ -105,9 +113,14 @@ if __name__ == '__main__':
 
 	tweets = api.user_timeline(screen_name="btecbill", count=20)
 
+	# print(dir(tweets[0]))
+	#print(tweets[0].retweet_count)
+
 	df = tweet_analyser.tweets_to_data_frame(tweets)
 
 	print(df.head(10))
+
+
 
 
 
