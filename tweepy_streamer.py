@@ -112,12 +112,12 @@ if __name__ == '__main__':
 	tweet_analyser = TweetAnalyser()
 	api = twitter_client.get_twitter_client_api()
 
-	tweets = api.user_timeline(screen_name="realDonaldTrump", count=20)
+	tweets = api.user_timeline(screen_name="realDonaldTrump", count=2000)
 
 	df = tweet_analyser.tweets_to_data_frame(tweets)
 
 	# Get average length over all tweets.
-	print(np.mean(df['length']))
+	# print(np.mean(df['length']))
 
 	#Get number of likes for most liked tweet
 	print(np.max(df['likes'])) 
@@ -126,11 +126,22 @@ if __name__ == '__main__':
 	print(np.max(df['retweets']))
 
 	#Time series
+
+	# time_likes = pd.Series(data=df['likes'].values, index=df['date'])
+	# time_likes.plot(figsize=(16, 4), color='r')
+	# plt.show()
+
+	# time_retweets = pd.Series(data=df['retweets'].values, index=df['date'])
+	# time_retweets.plot(figsize=(16, 4), color='r')
+	# plt.show()
+
 	time_likes = pd.Series(data=df['likes'].values, index=df['date'])
-	time_likes.plot(figsize=(16, 4), color='r')
+	time_likes.plot(figsize=(16, 4), label="likes", legend=True)
+
+	time_retweets = pd.Series(data=df['retweets'].values, index=df['date'])
+	time_retweets.plot(figsize=(16, 4), label="retweets", legend=True)	
+
 	plt.show()
-
-
 
 
 
