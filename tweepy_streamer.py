@@ -16,8 +16,7 @@ class TwitterClient():
 
         self.twitter_user = twitter_user
 
-
-    def get_twitter_client_api(self)
+    def get_twitter_client_api(self):
     	return self.twitter_client
 
     def get_user_timeline_tweets(self, num_tweets):
@@ -89,16 +88,43 @@ class TwitterListener(StreamListener):
             return False
         print(status)
 
+class TweetAnalyser ():
+	"""
+	Functionality for analysing and catagorising content from tweets
+	"""
+	def tweets_to_data_frame(self, tweets):
+		df = pd.DataFrame(data=[tweet.text for tweet in tweets], columns=['Tweets'])
+		return df
  
 if __name__ == '__main__': 
  
-    # Authenticate using config.py and connect to Twitter Streaming API.
-    hash_tag_list = ["donal trump", "hillary clinton", "barack obama", "bernie sanders"]
-    fetched_tweets_filename = "tweets.txt"
 
-    #Enter twitter user's handle here and the amount of tweets wanteds
-    twitter_client = TwitterClient()
-    print(twitter_client.get_user_timeline_tweets(1))
+	twitter_client = TwitterClient()
+	tweet_analyser = TweetAnalyser()
+	api = twitter_client.get_twitter_client_api()
+
+	tweets = api.user_timeline(screen_name="btecbill", count=20)
+
+	df = tweet_analyser.tweets_to_data_frame(tweets)
+
+	print(df.head(10))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
